@@ -21,7 +21,7 @@ export const Home = () => {
                 <SudokuGrid/>
 
                 <div className={styles.buttonRow}>
-                    <button disabled={gridIsFinalized}>Finalize Your Grid</button>
+                    <button disabled={gridIsFinalized} onClick={() => setGridIsFinalized(true)}>Finalize Your Grid</button>
                     <button disabled={!gridIsFinalized}>Fill in Hints</button>
                     <button disabled={!gridIsFinalized}>Solve Puzzle</button>
                 </div>
