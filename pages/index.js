@@ -1,11 +1,11 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import {SudokuGrid} from "../components/SudokuGrid";
 import {useState} from "react";
 
 export const Home = () => {
     const [gridIsFinalized, setGridIsFinalized] = useState(false);
+
     return (
         <div className={styles.container}>
             <Head>
@@ -18,7 +18,7 @@ export const Home = () => {
                 <h1 className={styles.title}>Sudoku Solver</h1>
                 <h2>Enter your Sudoku below then press Solve to solve it</h2>
 
-                <SudokuGrid/>
+                <SudokuGrid gridIsFinalized={gridIsFinalized}/>
 
                 <div className={styles.buttonRow}>
                     <button disabled={gridIsFinalized} onClick={() => setGridIsFinalized(true)}>Finalize Your Grid</button>
