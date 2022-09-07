@@ -1,0 +1,13 @@
+.hintCell {
+    font-size: 1rem;
+    color: #999;
+}
+
+.individualHint {
+    width: 33.3%;
+    display: inline-block;
+}
+
+.hidden {
+    display: none;
+}

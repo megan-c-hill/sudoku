@@ -1,19 +1,8 @@
 import React, {useState} from 'react';
 
 import styles from '../styles/sudoku-grid.module.css';
-
-const EMPTY_CELL = {
-    hints: [],
-    setNumber: -1,
-    guessNumber: -1,
-    active: false
-}
-
-const initGrid = (height, width) =>
-    Array.from({length: height}).map((row, rowIndex) =>
-        Array.from({length: width}).map((column, columnIndex) => EMPTY_CELL
-        )
-    );
+import {EMPTY_CELL} from '../enums/cell';
+import {HintCell} from "./HintCell";
 
 const getClassName = (rowIndex, columnIndex, activeCoords, cell) => {
     let className = `${styles.cellInput}`;
@@ -54,8 +43,7 @@ const displayCell = (cell) => {
         return cell.guessNumber;
     }
     if(cell.hints.length) {
-        // return hints
-        return 'h';
+        return <HintCell hints={cell.hints}/>;
     }
 
     return '';
@@ -94,9 +82,12 @@ const onKeyPress = (event, activeCoords, gridIsFinalized, grid, setGrid) => {
     });
 }
 
-export const SudokuGrid = ({gridIsFinalized}) => {
-    const [grid, setGrid] = useState(initGrid(9, 9));
+export const SudokuGrid = ({grid, setGrid, gridIsFinalized}) => {
     const [activeCoords, setActiveCoords] = useState({x: -1, y: -1});
+
+    if(!grid) {
+        return 'Error'
+    }
 
     return (
         <div className={styles.table}>
