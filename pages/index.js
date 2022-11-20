@@ -1,21 +1,15 @@
 import Head from 'next/head'
-import {useState} from "react";
+import {useState} from 'react';
 
 import styles from '../styles/Home.module.css'
-import {SudokuGrid} from "../components/SudokuGrid";
-import {EMPTY_CELL} from '../enums/cell';
-
-const initGrid = (height, width) =>
-    Array.from({length: height}).map((row, rowIndex) =>
-        Array.from({length: width}).map((column, columnIndex) => EMPTY_CELL
-        )
-    );
+import {SudokuGrid} from '../components/SudokuGrid';
+import {computeHintsForCell, initGrid} from '../helpers/grid-helpers';
 
 const fillInHints = (grid, setGrid) => {
     const newGrid = grid.map((row, rowIndex) =>
         row.map((cell, columnIndex) => ({
                 ...cell,
-                hints: [1,3,5,6,7,8]
+                hints: computeHintsForCell(grid, cell, rowIndex, columnIndex)
             })
         )
     );
@@ -26,8 +20,6 @@ const fillInHints = (grid, setGrid) => {
 export const Home = () => {
     const [gridIsFinalized, setGridIsFinalized] = useState(false);
     const [grid, setGrid] = useState(initGrid(9, 9));
-    
-    console.log('grid', grid);
 
     return (
         <div className={styles.container}>
