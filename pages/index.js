@@ -3,19 +3,15 @@ import {useState} from 'react';
 
 import styles from '../styles/Home.module.css'
 import {SudokuGrid} from '../components/SudokuGrid';
-import {computeHintsForCell, initGrid} from '../helpers/grid-helpers';
+import {initGrid} from "../helpers/initialization-helpers";
+import {fillInHints} from "../helpers/hint-helpers";
 
-const fillInHints = (grid, setGrid) => {
-    const newGrid = grid.map((row, rowIndex) =>
-        row.map((cell, columnIndex) => ({
-                ...cell,
-                hints: computeHintsForCell(grid, cell, rowIndex, columnIndex)
-            })
-        )
-    );
-
-    setGrid(newGrid);
-}
+// TO DOs
+// 1. Make solve button work
+// 2. Allow user to edit hints
+// 3. Inform user of errors in the grid
+// 4. Tests
+// 5. UX Improvements (Mobile Responsiveness, Not allowing invalid inputs, etc)
 
 export const Home = () => {
     const [gridIsFinalized, setGridIsFinalized] = useState(false);
